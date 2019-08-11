@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This is the console for AirBnB"""
 import cmd
-from models import storage
+from models import classes, storage
 from datetime import datetime
 from models.base_model import BaseModel
 from models.user import User
@@ -17,8 +17,7 @@ class HBNBCommand(cmd.Cmd):
     """this class is entry point of the command interpreter
     """
     prompt = "(hbnb) "
-    all_classes = {"BaseModel", "User", "State", "City",
-                   "Amenity", "Place", "Review"}
+    all_classes = classes
 
     def emptyline(self):
         """Ignores empty spaces"""
@@ -30,25 +29,64 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, line):
         """Quit command to exit the program at end of file"""
+        print()
         return True
 
-    def do_create(self, line):
-        """Creates a new instance of BaseModel, saves it
-        Exceptions:
-            SyntaxError: when there is no args given
-            NameError: when there is no object taht has the name
-        """
-        try:
-            if not line:
-                raise SyntaxError()
-            my_list = line.split(" ")
-            obj = eval("{}()".format(my_list[0]))
+ #    def do_create(self, line):
+ #        """Creates a new instance of BaseModel, saves it
+ #        Exceptions:
+ #            SyntaxError: when there is no args given
+ #            NameError: when there is no object taht has the name
+ #        """
+ #        try:
+ #            if not line:
+ #                raise SyntaxError()
+ #            my_list = line.split(" ")
+ #            obj = eval("{}()".format(my_list[0]))
+ #            obj.save()
+ #            print("{}".format(obj.id))
+ #        except SyntaxError:
+ #            print("** class name missing **")
+ #        except NameError:
+ #            print("** class doesn't exist **")
+    def __build_dict(self, args):
+        params = args.split(' ')
+        final_dic = {}
+        for item in params:
+            kval = item.split('=')
+            value = kval[1]
+            if value.isdigit():
+                value = int(value)
+            elif value.replace('.', '', 1).isdigit() or '-' in value:
+                value = float(value)
+            else:
+                value = value.replace('"', '').replace('_', ' ')
+            final_dic[kval[0]] = value
+        return final_dic
+
+    def do_create(self, args):
+        """ Creates a new instance of BaseModel """
+        arguments = args.split(' ', 1)
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        if arguments[0] in self.all_classes:
+            if arguments[1]:
+                args_dict = self.__build_dict(arguments[1:][0])
+            else:
+                args_dict = {}
+            # print(args_dict)
+            obj = eval("{}()".format(arguments[0]))
             obj.save()
             print("{}".format(obj.id))
-        except SyntaxError:
-            print("** class name missing **")
-        except NameError:
+            # print(obj.__dict__)
+            obj.__dict__.update(args_dict)
+            # ins = self.all_classes[arguments[0]](**args_dict)
+            #print("Esta es la instancia creada {}".format(ins))
+            #storage.save()
+        else:
             print("** class doesn't exist **")
+
 
     def do_show(self, line):
         """Prints the string representation of an instance
