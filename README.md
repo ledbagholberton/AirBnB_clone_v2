@@ -1,5 +1,7 @@
 # HBNB
 
+### fork repo to work on group project
+
 This is the console /command interpreter for the Holberton Airbnb clone project. The console can be used to store objects in and retrieve objects from a JSON.
 
 ### Supported classes:
