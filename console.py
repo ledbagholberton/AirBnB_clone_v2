@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """This is the console for AirBnB"""
 import cmd
+import re
 from models import storage
 from datetime import datetime
 from models.base_model import BaseModel
@@ -33,23 +34,6 @@ class HBNBCommand(cmd.Cmd):
         print()
         return True
 
- #    def do_create(self, line):
- #        """Creates a new instance of BaseModel, saves it
- #        Exceptions:
- #            SyntaxError: when there is no args given
- #            NameError: when there is no object taht has the name
- #        """
- #        try:
- #            if not line:
- #                raise SyntaxError()
- #            my_list = line.split(" ")
- #            obj = eval("{}()".format(my_list[0]))
- #            obj.save()
- #            print("{}".format(obj.id))
- #        except SyntaxError:
- #            print("** class name missing **")
- #        except NameError:
- #            print("** class doesn't exist **")
     def __build_dict(self, args):
         """Creates a dictionary based on string passed on args"""
         params = args.split(' ')
@@ -62,7 +46,9 @@ class HBNBCommand(cmd.Cmd):
             elif value.replace('.', '', 1).isdigit() or '-' in value[0]:
                 value = float(value)
             else:
-                value = value.replace('"', '').replace('_', ' ')
+                value = value.replace('"', '', 1)
+                value = re.sub(r"\"$", '', value)
+                value = value.replace('"', '\"').replace('_', ' ')
             final_dic[kval[0]] = value
         return final_dic
 
@@ -74,18 +60,16 @@ class HBNBCommand(cmd.Cmd):
             return
         if arguments[0] in self.all_classes:
             if arguments[1]:
-                args_dict = self.__build_dict(arguments[1:][0])
+                try:
+                    args_dict = self.__build_dict(arguments[1:][0])
+                except IndexError:
+                    args_dict = {}
             else:
                 args_dict = {}
-            # print(args_dict)
             obj = eval("{}()".format(arguments[0]))
             obj.save()
             print("{}".format(obj.id))
-            # print(obj.__dict__)
             obj.__dict__.update(args_dict)
-            # ins = self.all_classes[arguments[0]](**args_dict)
-            #print("Esta es la instancia creada {}".format(ins))
-            #storage.save()
         else:
             print("** class doesn't exist **")
 
