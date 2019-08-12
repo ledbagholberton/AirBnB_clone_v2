@@ -50,6 +50,7 @@ class HBNBCommand(cmd.Cmd):
  #        except NameError:
  #            print("** class doesn't exist **")
     def __build_dict(self, args):
+        """Creates a dictionary based on string passed on args"""
         params = args.split(' ')
         final_dic = {}
         for item in params:
@@ -86,7 +87,6 @@ class HBNBCommand(cmd.Cmd):
             #storage.save()
         else:
             print("** class doesn't exist **")
-
 
     def do_show(self, line):
         """Prints the string representation of an instance
