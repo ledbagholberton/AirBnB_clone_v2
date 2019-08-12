@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This is the console for AirBnB"""
 import cmd
-from models import classes, storage
+from models import storage
 from datetime import datetime
 from models.base_model import BaseModel
 from models.user import User
@@ -17,7 +17,9 @@ class HBNBCommand(cmd.Cmd):
     """this class is entry point of the command interpreter
     """
     prompt = "(hbnb) "
-    all_classes = {"BaseModel", "User",  "State",  "City", "Amenity", "Place", "Review"}
+    all_classes = {"BaseModel", "User",  "State",  "City", "Amenity", "Place",
+                   "Review"}
+
     def emptyline(self):
         """Ignores empty spaces"""
         pass
@@ -57,7 +59,7 @@ class HBNBCommand(cmd.Cmd):
             value = kval[1]
             if value.isdigit():
                 value = int(value)
-            elif value.replace('.', '', 1).isdigit() or '-' in value:
+            elif value.replace('.', '', 1).isdigit() or '-' in value[0]:
                 value = float(value)
             else:
                 value = value.replace('"', '').replace('_', ' ')

@@ -13,6 +13,6 @@ create Review place_id="0021" user_id="0004" text="My_knowledge_about_this_ugly_
 
 all Review
 
-create User email="Juan_Pedro@gt.com" password="12_34_56" first_name="Juan_Carlos" last_name="Perez"
+create User email="Juan_Pedro@gt.com" password="12_34_56" first_name="Juan Carlos" last_name="Perez"
 
 all User
