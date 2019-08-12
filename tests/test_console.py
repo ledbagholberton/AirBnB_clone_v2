@@ -89,6 +89,53 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(
                 "[[User]", f.getvalue()[:7])
 
+    def test_create_params(self):
+        """Test create command inpout"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd("create")
+            self.assertEqual(
+                "** class name missing **\n", f.getvalue())
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd("create asdfsfsd")
+            self.assertEqual(
+                "** class doesn't exist **\n", f.getvalue())
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd('create User email="Juan_Pedro@gt.com" password="12_34_56" first_name="Juan_Carlos" last_name="Perez"')
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd("all User")
+            self.assertEqual(
+                "[[User]", f.getvalue()[:7])
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd('create Place city_id="0002" user_id="0002" name="My_little_house" number_rooms=4 number_bathrooms=2 max_guest=10 price_by_night=300 latitude=37.773972 longitude=-122.431297')
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd("all Place")
+            self.assertEqual(
+                "[[Place]", f.getvalue()[:8])
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd('create City state_id="0008" name="Los_Angeles"')
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd("all City")
+            self.assertEqual(
+                "[[City]", f.getvalue()[:7])
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd('create Review place_id="0008" user_id="0001" text="Muy bueno"')
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd("all Review")
+            self.assertEqual(
+                "[[Review]", f.getvalue()[:9])
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd('create State name="Texas"')
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd("all State")
+            self.assertEqual(
+                "[[State]", f.getvalue()[:8])
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd('create Amenity name="WiFi"')
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd("all Amenity")
+            self.assertEqual(
+                "[[Amenity]", f.getvalue()[:10])
+
     def test_show(self):
         """Test show command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
