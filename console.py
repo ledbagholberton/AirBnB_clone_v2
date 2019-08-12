@@ -48,29 +48,31 @@ class HBNBCommand(cmd.Cmd):
             else:
                 value = value.replace('"', '', 1)
                 value = re.sub(r"\"$", '', value)
-                value = value.replace('"', '\"').replace('_', ' ')
+                value = value.replace('_', ' ')
             final_dic[kval[0]] = value
         return final_dic
 
     def do_create(self, args):
         """ Creates a new instance of BaseModel """
-        arguments = args.split(' ', 1)
-        if len(args) == 0:
-            print("** class name missing **")
-            return
-        if arguments[0] in self.all_classes:
-            if arguments[1]:
-                try:
-                    args_dict = self.__build_dict(arguments[1:][0])
-                except IndexError:
+        try:
+            if not args:
+                raise SyntaxError()
+            arguments = args.split(' ', 1)
+            if arguments[0] in self.all_classes:
+                if arguments[1]:
+                    try:
+                        args_dict = self.__build_dict(arguments[1:][0])
+                    except IndexError:
+                        args_dict = {}
+                else:
                     args_dict = {}
-            else:
-                args_dict = {}
-            obj = eval("{}()".format(arguments[0]))
-            obj.save()
-            print("{}".format(obj.id))
-            obj.__dict__.update(args_dict)
-        else:
+                    obj = eval("{}()".format(arguments[0]))
+                    obj.save()
+                    print("{}".format(obj.id))
+                    obj.__dict__.update(args_dict)
+        except SyntaxError():
+            print("** class name missing **")
+        except NameError():
             print("** class doesn't exist **")
 
     def do_show(self, line):
