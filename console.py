@@ -39,17 +39,18 @@ class HBNBCommand(cmd.Cmd):
         params = args.split(' ')
         final_dic = {}
         for item in params:
-            kval = item.split('=')
-            value = kval[1]
-            if value.isdigit():
-                value = int(value)
-            elif value.replace('.', '', 1).isdigit() or '-' in value[0]:
-                value = float(value)
-            else:
-                value = value.replace('"', '', 1)
-                value = re.sub(r"\"$", '', value)
-                value = value.replace('_', ' ')
-            final_dic[kval[0]] = value
+            if '=' in item:
+                kval = item.split('=')
+                value = kval[1]
+                if value.isdigit():
+                    value = int(value)
+                elif value.replace('.', '', 1).isdigit() or '-' in value[0]:
+                    value = float(value)
+                else:
+                    value = value.replace('"', '', 1)
+                    value = re.sub(r"\"$", '', value)
+                    value = value.replace('_', ' ')
+                final_dic[kval[0]] = value
         return final_dic
 
     def do_create(self, args):
@@ -63,7 +64,9 @@ class HBNBCommand(cmd.Cmd):
             obj = eval("{}()".format(arguments[0]))
             print("{}".format(obj.id))
             if arguments[1]:
-                args_dict = self.__build_dict(arguments[1:][0])
+                # print("MI DICCIONARIO: {}".format(arguments[1]))
+                args_dict = self.__build_dict(arguments[1])
+
                 # for k, v in args_dict.items():
                 #    obj.__dict__[k] = v
                 obj.__dict__.update(args_dict)
