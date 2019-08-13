@@ -54,25 +54,19 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Creates a new instance of BaseModel """
-        try:
-            if not args:
-                raise SyntaxError()
-            arguments = args.split(' ', 1)
-            if arguments[0] in self.all_classes:
-                if arguments[1]:
-                    try:
-                        args_dict = self.__build_dict(arguments[1:][0])
-                    except IndexError:
-                        args_dict = {}
-                else:
-                    args_dict = {}
-                    obj = eval("{}()".format(arguments[0]))
-                    obj.save()
-                    print("{}".format(obj.id))
-                    obj.__dict__.update(args_dict)
-        except SyntaxError():
+        if len(args) == 0:
             print("** class name missing **")
-        except NameError():
+            return
+        arguments = args.split(' ', 1)
+        if arguments[0] in self.all_classes:
+            args_dict = {}
+            obj = eval("{}()".format(arguments[0]))
+            obj.save()
+            print("{}".format(obj.id))
+            if arguments[1]:
+                args_dict = self.__build_dict(arguments[1:][0])
+                obj.__dict__.update(args_dict)
+        else:
             print("** class doesn't exist **")
 
     def do_show(self, line):
