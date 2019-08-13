@@ -63,14 +63,12 @@ class HBNBCommand(cmd.Cmd):
             args_dict = {}
             obj = eval("{}()".format(arguments[0]))
             print("{}".format(obj.id))
-            if arguments[1]:
-                # print("MI DICCIONARIO: {}".format(arguments[1]))
-                args_dict = self.__build_dict(arguments[1])
-
-                # for k, v in args_dict.items():
-                #    obj.__dict__[k] = v
-                obj.__dict__.update(args_dict)
-                # obj.__dict__[arguments[0]].update(args_dict)
+            try:
+                if arguments[1]:
+                    args_dict = self.__build_dict(arguments[1])
+                    obj.__dict__.update(args_dict)
+            except IndexError:
+                pass
             obj.save()
         else:
             print("** class doesn't exist **")
