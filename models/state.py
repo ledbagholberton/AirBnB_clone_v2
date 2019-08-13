@@ -21,7 +21,6 @@ class State(BaseModel, Base):
         cities = relationship('City', cascade="all, delete", backref='state')
     else:
         name = ""
-
         @property
         def get_cities(self):
  #           my_storage = FileStorage()
