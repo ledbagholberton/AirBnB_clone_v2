@@ -100,25 +100,33 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(
                 "** class doesn't exist **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd('create User email="Juan_Pedro@gt.com" password="12_34_56" first_name="Juan_Carlos" last_name="Perez"')
+            self.consol.onecmd('create User email="Juan_Pedro@gt.com"\
+                                password="12_34_56" first_name="Juan_Carlos"\
+                                last_name="Perez"')
         with patch('sys.stdout', new=StringIO()) as f:
             self.consol.onecmd("all User")
             self.assertEqual(
                 "[[User]", f.getvalue()[:7])
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd('create Place city_id="0002" user_id="0002" name="My_little_house" number_rooms=4 number_bathrooms=2 max_guest=10 price_by_night=300 latitude=37.773972 longitude=-122.431297')
+            self.consol.onecmd('create Place city_id="0002" user_id="0002"\
+                                name="My_little_house" number_rooms=4\
+                                number_bathrooms=2 max_guest=10\
+                                price_by_night=300 latitude=37.773972\
+                                longitude=-122.431297')
         with patch('sys.stdout', new=StringIO()) as f:
             self.consol.onecmd("all Place")
             self.assertEqual(
                 "[[Place]", f.getvalue()[:8])
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd('create City state_id="0008" name="Los_Angeles"')
+            self.consol.onecmd('create City state_id="0008"\
+                                name="Los_Angeles"')
         with patch('sys.stdout', new=StringIO()) as f:
             self.consol.onecmd("all City")
             self.assertEqual(
                 "[[City]", f.getvalue()[:7])
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd('create Review place_id="0008" user_id="0001" text="Muy bueno"')
+            self.consol.onecmd('create Review place_id="0008" user_id="0001"\
+                                text="Muy bueno"')
         with patch('sys.stdout', new=StringIO()) as f:
             self.consol.onecmd("all Review")
             self.assertEqual(
