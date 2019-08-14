@@ -4,7 +4,7 @@ import cmd
 import re
 from models import storage
 from datetime import datetime
-from models.base_model import BaseModel
+from models.base_model import BaseModel, os_type_storage
 from models.user import User
 from models.state import State
 from models.city import City
@@ -141,7 +141,10 @@ class HBNBCommand(cmd.Cmd):
         Exceptions:
             NameError: when there is no object taht has the name
         """
-        objects = storage.all()
+        if line and os_type_storage == "db":
+            objects = storage.all(line)
+        else:
+            objects = storage.all()
         my_list = []
         if not line:
             for key in objects:

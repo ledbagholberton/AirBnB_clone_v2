@@ -11,4 +11,3 @@ fs = FileStorage()
 new_state = State()
 new_state.name = "California"
 #print(new_state)
-
