@@ -6,7 +6,7 @@ from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import (create_engine)
 from sqlalchemy.orm import sessionmaker, relationship
-from sqlalchemy import Column, Integer, String, ForeignKey,DateTime
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 import os
 
 
@@ -25,8 +25,10 @@ class BaseModel:
     """
     if os_type_storage == "db":
         id = Column(String(60), primary_key=True, nullable=False)
-        created_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
-        updated_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
+        created_at = Column(DateTime, default=datetime.utcnow(),
+                            nullable=False)
+        updated_at = Column(DateTime, default=datetime.utcnow(),
+                            nullable=False)
 
     def __init__(self, *args, **kwargs):
         """Instantiation of base model class

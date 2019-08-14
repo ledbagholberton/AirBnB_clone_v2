@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """This is the state class"""
 from models.base_model import Base, BaseModel, os_type_storage
-#from models.engine.file_storage import FileStorage
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
+
 
 class State(BaseModel, Base):
     """This is the class for State
@@ -17,10 +17,11 @@ class State(BaseModel, Base):
         cities = relationship('City', cascade="all, delete", backref='state')
     else:
         name = ""
+
         @property
         def get_cities(self):
-#            my_storage = FileStorage()
             my_list = []
+            # my_storage = FileStorage()
             dict_city = my_storage.all(City)
             for key, value in dict_city.items():
                 if self.id == dict_city['state_id']:

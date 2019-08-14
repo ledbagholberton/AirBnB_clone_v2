@@ -28,7 +28,7 @@ class FileStorage:
         if cls:
             new_object = {}
             for key, value in self.__objects.items():
-                if  cls is value.__class__:
+                if cls is value.__class__:
                     new_object[key] = value
             return new_object
         return self.__objects

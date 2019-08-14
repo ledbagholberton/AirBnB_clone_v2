@@ -4,6 +4,7 @@ from models.base_model import BaseModel, Base, os_type_storage
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 
+
 class City(BaseModel, Base):
     """This is the class for City
     Attributes:

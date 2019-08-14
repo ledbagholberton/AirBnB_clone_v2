@@ -2,7 +2,7 @@
 """This is the console for AirBnB"""
 import cmd
 import re
-from models import storage, dict_classes
+from models import storage
 from datetime import datetime
 from models.base_model import BaseModel, os_type_storage
 from models.user import User
