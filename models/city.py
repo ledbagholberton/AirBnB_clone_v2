@@ -2,6 +2,7 @@
 """This is the city class"""
 from models.base_model import BaseModel
 
+from models.base_model import os_type_storage
 from models.base_model import Base
 from sqlalchemy import Column, Integer, String, ForeignKey
 import os
@@ -13,8 +14,7 @@ class City(BaseModel, Base):
         name: input name
     """
 
-    os_env = os.environ['HBNB_TYPE_STORAGE']
-    if os_env == "db":
+    if os_type_storage == "db":
         __tablename__ = "cities"
         name = Column(String(128), nullable=False)
         state_id = Column(String(60), ForeignKey('states.id'), nullable=False)

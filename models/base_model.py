@@ -10,9 +10,12 @@ from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy import Column, Integer, String, ForeignKey,DateTime
 import os
 
-
-
 os_type_storage = os.environ['HBNB_TYPE_STORAGE']
+os_user = os.environ['HBNB_MYSQL_USER']
+os_pass = os.environ['HBNB_MYSQL_PWD']
+os_host = os.environ['HBNB_MYSQL_HOST']
+os_db = os.environ['HBNB_MYSQL_DB']
+os_env = os.environ['HBNB_ENV']
 
 if os_type_storage == 'db':
     Base = declarative_base()

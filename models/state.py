@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This is the state class"""
 from models.base_model import BaseModel
-
+from models.base_model import os_type_storage
 from models.base_model import Base
 #from models.engine.file_storage import FileStorage
 import os
@@ -14,8 +14,7 @@ class State(BaseModel, Base):
         name: input name
     """
 
-    os_env = os.environ['HBNB_TYPE_STORAGE']
-    if os_env == "db":
+    if os_type_storage == "db":
         __tablename__ = "states"
         name = Column(String(128),  nullable=False)
         cities = relationship('City', cascade="all, delete", backref='state')

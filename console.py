@@ -2,6 +2,7 @@
 """This is the console for AirBnB"""
 import cmd
 import re
+from models.base_model import os_type_storage
 from models import storage, dict_classes
 from datetime import datetime
 from models.base_model import BaseModel
@@ -141,7 +142,7 @@ class HBNBCommand(cmd.Cmd):
         Exceptions:
             NameError: when there is no object taht has the name
         """
-        if line:
+        if line and os_type_storage == "db":
             objects = storage.all(line)
         else:
             objects = storage.all()

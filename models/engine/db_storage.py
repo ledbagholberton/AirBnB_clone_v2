@@ -3,17 +3,11 @@
 import os
 from models import dict_classes
 from models.base_model import Base
-
+from models.base_model import os_user, os_pass, os_host, os_db, os_env
 from models.state import State
 from models.city import City
 from sqlalchemy import (create_engine)
 from sqlalchemy.orm import sessionmaker, scoped_session
-
-os_user = os.environ['HBNB_MYSQL_USER']
-os_pass = os.environ['HBNB_MYSQL_PWD']
-os_host = os.environ['HBNB_MYSQL_HOST']
-os_db = os.environ['HBNB_MYSQL_DB']
-os_env = os.environ['HBNB_ENV']
 
 class DBStorage:
     """This class storage instances in MySQL
@@ -36,7 +30,8 @@ class DBStorage:
         """
         Session = sessionmaker(bind=self.__engine)
         self.__session = Session()
-        if cls in dict_classes.keys():
+        print("MY CLASS", cls)
+        if cls in dict_classes:
             a = self.__session.query(dict_classes[cls]).all()
             print("ESTE ES MI QUERY", a)
             #return (session.query(cls).all())
@@ -48,6 +43,7 @@ class DBStorage:
             print("vacio")
             self.__session.commit()
             self.__session.close()
+
     def new(self, obj):
         """sets __object to given obj
         Args:
