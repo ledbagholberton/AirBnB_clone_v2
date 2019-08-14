@@ -1,17 +1,16 @@
 #!/usr/bin/python3
 """create a unique FileStorage instance for your application"""
 
-from models.base_model import BaseModel, Base, os_type_storage
+from models.base_model import os_type_storage
 from models.user import User
 from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
-import os
 
-dict_classes = {"BaseModel": BaseModel,
-                "User": User,
+
+dict_classes = {"User": User,
                 "State": State,
                 "City": City,
                 "Amenity": Amenity,

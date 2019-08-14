@@ -3,11 +3,18 @@
 import os
 from models import dict_classes
 from models.base_model import Base
-from models.base_model import os_user, os_pass, os_host, os_db, os_env
 from models.state import State
 from models.city import City
 from sqlalchemy import (create_engine)
 from sqlalchemy.orm import sessionmaker, scoped_session
+from models.base_model import os_type_storage
+
+os_user = os.environ['HBNB_MYSQL_USER']
+os_pass = os.environ['HBNB_MYSQL_PWD']
+os_host = os.environ['HBNB_MYSQL_HOST']
+os_db = os.environ['HBNB_MYSQL_DB']
+os_env = os.environ['HBNB_ENV']
+
 
 class DBStorage:
     """This class storage instances in MySQL
@@ -20,7 +27,7 @@ class DBStorage:
                                       .format(os_user, os_pass, os_host, os_db),
                                       pool_pre_ping=True)
         if os_env == "test":
-            drop_all(bind=None)
+            Base.metadata.drop_all(bind=self.__engine)
 
 
     def all(self, cls=None):
@@ -30,17 +37,26 @@ class DBStorage:
         """
         Session = sessionmaker(bind=self.__engine)
         self.__session = Session()
-        print("MY CLASS", cls)
         if cls in dict_classes:
             a = self.__session.query(dict_classes[cls]).all()
-            print("ESTE ES MI QUERY", a)
-            #return (session.query(cls).all())
+            new_dict = {}
+            for value in a:
+                my_class = value.__class__.__name__
+                my_id = str(value.id)
+                my_key = my_class + "." + my_id
+                new_dict[my_key] = value
+            return (new_dict)
             self.__session.commit()
             self.__session.close()
         else:
-            #print(self.__session.all())
-            #return (session.query.all())
-            print("vacio")
+            a = self.__session.query().all()
+            new_dict = {}
+            for value in a:
+                my_class = value.__class__.__name__
+                my_id = str(value.id)
+                my_key = my_class + "." + my_id
+                new_dict[my_key] = value
+            return (new_dict)
             self.__session.commit()
             self.__session.close()
 

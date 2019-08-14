@@ -1,10 +1,7 @@
 #!/usr/bin/python3
 """This is the state class"""
-from models.base_model import BaseModel
-from models.base_model import os_type_storage
-from models.base_model import Base
+from models.base_model import Base, BaseModel, os_type_storage
 #from models.engine.file_storage import FileStorage
-import os
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 
@@ -22,10 +19,10 @@ class State(BaseModel, Base):
         name = ""
         @property
         def get_cities(self):
- #           my_storage = FileStorage()
+#            my_storage = FileStorage()
             my_list = []
- #           dict_city = my_storage.all(City)
- #           for key, value in dict_city.items():
- #               if self.id == dict_city['state_id']:
- #                   my_list.append(value)
+            dict_city = my_storage.all(City)
+            for key, value in dict_city.items():
+                if self.id == dict_city['state_id']:
+                    my_list.append(value)
             return(my_list)
