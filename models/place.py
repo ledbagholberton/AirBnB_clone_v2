@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """This is the place class"""
 from models.base_model import BaseModel, Base, os_type_storage
+from models import *
 from sqlalchemy import Column, Float, Integer, String, ForeignKey, Table
 from sqlalchemy.orm import relationship
 import models
@@ -71,3 +72,18 @@ class Place(BaseModel, Base):
                 if self.id == reviews_dict['place_id']:
                     my_list.append(value)
             return(my_list)
+
+        @property
+        def get_amenities(self):
+            my_list = []
+            amen_dict = models.storage.all(Amenity)
+            amen_ids = amen_dict['amenity_ids']
+            for item in amenity_ids:
+                if self.id == item:
+                    my_list.append(item)
+            return(my_list)
+
+        @get_amenities.setter
+        def amenities(self, obj):
+            if isinstance(obj, Amenity):
+                self.amenity_ids.append(obj.id)
