@@ -6,11 +6,11 @@ from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import (create_engine)
 from sqlalchemy.orm import sessionmaker, relationship
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, String, DateTime
 import os
 
 
-os_type_storage = os.environ['HBNB_TYPE_STORAGE']
+os_type_storage = os.getenv('HBNB_TYPE_STORAGE')
 
 
 if os_type_storage == 'db':
@@ -23,12 +23,12 @@ class BaseModel:
     """This class will defines all common attributes/methods
     for other classes
     """
-    if os_type_storage == "db":
-        id = Column(String(60), primary_key=True, nullable=False)
-        created_at = Column(DateTime, default=datetime.utcnow(),
-                            nullable=False)
-        updated_at = Column(DateTime, default=datetime.utcnow(),
-                            nullable=False)
+    # if os_type_storage == "db":
+    id = Column(String(60), primary_key=True, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow(),
+                        nullable=False)
+    updated_at = Column(DateTime, default=datetime.utcnow(),
+                        nullable=False)
 
     def __init__(self, *args, **kwargs):
         """Instantiation of base model class
@@ -41,6 +41,12 @@ class BaseModel:
             updated_at: updated date
         """
         if kwargs:
+            if 'id' not in kwargs.keys():
+                self.id = str(uuid.uuid4())
+            if 'created_at' not in kwargs.keys():
+                self.created_at = datetime.now()
+            if 'updated_at' not in kwargs.keys():
+                self.updated_at = datetime.now()
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
