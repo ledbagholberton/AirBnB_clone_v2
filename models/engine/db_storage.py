@@ -60,7 +60,7 @@ class DBStorage:
             self.__session.close()
         else:
             # cls_list = [User, State, City, Place, Review, Amenity]
-            cls_list = [State, City, User]
+            cls_list = [State, City, User, Review, Place]
             list_obj = []
             for item in cls_list:
                     list_obj.append(self.__session.query(item).all())
