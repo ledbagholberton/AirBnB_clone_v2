@@ -59,11 +59,10 @@ class DBStorage:
             self.__session.commit()
             self.__session.close()
         else:
-            # cls_list = [User, State, City, Place, Review, Amenity]
-            cls_list = [State, City, User, Review, Place]
+            cls_list = [State, City, User, Review, Place, Amenity]
             list_obj = []
             for item in cls_list:
-                    list_obj.append(self.__session.query(item).all())
+                list_obj.append(self.__session.query(item).all())
             new_dict = {}
             for value in list_obj:
                 for item in value:
