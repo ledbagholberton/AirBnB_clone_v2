@@ -12,11 +12,11 @@ from sqlalchemy import (create_engine)
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import os_type_storage
 
-os_user = os.environ['HBNB_MYSQL_USER']
-os_pass = os.environ['HBNB_MYSQL_PWD']
-os_host = os.environ['HBNB_MYSQL_HOST']
-os_db = os.environ['HBNB_MYSQL_DB']
-os_env = os.environ['HBNB_ENV']
+os_user = os.getenv('HBNB_MYSQL_USER')
+os_pass = os.getenv('HBNB_MYSQL_PWD')
+os_host = os.getenv('HBNB_MYSQL_HOST')
+os_db = os.getenv('HBNB_MYSQL_DB')
+os_env = os.getenv('HBNB_ENV')
 
 dict_classes = {"User": User,
                 "State": State,

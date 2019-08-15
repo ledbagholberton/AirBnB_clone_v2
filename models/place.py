@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This is the place class"""
 from models.base_model import BaseModel, Base, os_type_storage
-from sqlalchemy import Column, Float, Integer, String, ForeignKey
+from sqlalchemy import Column, Float, Integer, String, ForeignKey, Table
 from sqlalchemy.orm import relationship
 import models
 
@@ -10,11 +10,11 @@ if os_type_storage == "db":
     place_amenity = Table("place_amenity", Base.metadata,
                           Column("place_id", String(60),
                                  ForeignKey("places.id"),
-                                 primarykey=True,
+                                 primary_key=True,
                                  nullable=False),
                           Column("amenity_id", String(60),
                                  ForeignKey("amenities.id"),
-                                 primarykey=True,
+                                 primary_key=True,
                                  nullable=False))
 
 
