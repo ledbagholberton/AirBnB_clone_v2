@@ -23,12 +23,12 @@ class BaseModel:
     """This class will defines all common attributes/methods
     for other classes
     """
-    # if os_type_storage == "db":
-    id = Column(String(60), primary_key=True, nullable=False)
-    created_at = Column(DateTime, default=datetime.utcnow(),
-                        nullable=False)
-    updated_at = Column(DateTime, default=datetime.utcnow(),
-                        nullable=False)
+    if os_type_storage == "db":
+        id = Column(String(60), primary_key=True, nullable=False)
+        created_at = Column(DateTime, default=datetime.utcnow(),
+                            nullable=False)
+        updated_at = Column(DateTime, default=datetime.utcnow(),
+                            nullable=False)
 
     def __init__(self, *args, **kwargs):
         """Instantiation of base model class
