@@ -72,6 +72,8 @@ class TestConsole(unittest.TestCase):
             self.consol.onecmd("quit")
             self.assertEqual('', f.getvalue())
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == "db",
+                     "not supported by DBStorage")
     def test_create(self):
         """Test create command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
@@ -89,6 +91,8 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(
                 "[[User]", f.getvalue()[:7])
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == "db",
+                     "not supported by DBStorage")
     def test_create_params(self):
         """Test create command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
@@ -191,6 +195,8 @@ class TestConsole(unittest.TestCase):
             self.consol.onecmd("all State")
             self.assertEqual("[]\n", f.getvalue())
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == "db",
+                     "not supported by DBStorage")
     def test_update(self):
         """Test update command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
@@ -222,6 +228,7 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(
                 "** value missing **\n", f.getvalue())
 
+    @unittest.skip("not supported by DBStorage")
     def test_z_all(self):
         """Test alternate all command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
@@ -232,6 +239,7 @@ class TestConsole(unittest.TestCase):
             self.consol.onecmd("State.all()")
             self.assertEqual("[]\n", f.getvalue())
 
+    @unittest.skip("not supported by DBStorage")
     def test_z_count(self):
         """Test count command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
@@ -264,6 +272,8 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(
                 "** no instance found **\n", f.getvalue())
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == "db",
+                     "not supported by DBStorage")
     def test_update(self):
         """Test alternate destroy command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
