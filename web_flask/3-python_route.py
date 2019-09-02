@@ -22,4 +22,17 @@ def cissome(text):
     """ Print C + <name> without underscore """
     return("C {}".format(text.replace("_", " ")))
 
+
+@app.route('/python/', strict_slashes=False)
+@app.route('/python', strict_slashes=False)
+def pythonalone():
+    """ Print Python is cool ... by defaul agnostic slash """
+    return("Python is cool")
+
+
+@app.route('/python/<text>', strict_slashes=False)
+def pythonissome(text):
+    """ Print Python + <name> without underscore """
+    return("Python {}".format(text.replace("_", " ")))
+
 app.run(host='0.0.0.0', port=5000)
