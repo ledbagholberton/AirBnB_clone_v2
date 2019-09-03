@@ -30,13 +30,13 @@ def pythonalone():
     return("Python is cool")
 
 
-@app.route('/python/<text>')
+@app.route('/python/<text>', strict_slashes=False)
 def pythonissome(text):
     """ Print Python + <name> without underscore """
     return("Python {}".format(text.replace("_", " ")))
 
 
-@app.route('/number/<nummer>')
+@app.route('/number/<nummer>', strict_slashes=False)
 def numberisint(nummer):
     """ Print a number if is number """
     if nummer.isdigit():

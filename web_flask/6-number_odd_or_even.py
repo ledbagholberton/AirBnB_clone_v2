@@ -42,12 +42,23 @@ def numberisint(nummer):
     if nummer.isdigit():
         return("{} is a number".format(nummer))
 
-
 @app.route('/number_template/<nummer>', strict_slashes=False)
 def number_template(nummer):
     """ Print a template with a variable """
     if nummer.isdigit():
         return render_template('5-number.html', name=nummer)
+    else:
+        return render_template('no_found.html'), 404
+
+
+@app.route('/number_odd_or_even/<nummer>', strict_slashes=False)
+def number_even(nummer):
+    """ Print a template witheven or odd """
+    if nummer.isdigit():
+        if (nummer % 2) == 0:
+            return render_template('6-number_odd_or_even.html', name=nummer, type="even")
+        else:
+            return render_template('6-number_odd_or_even.html', name=nummer, type="odd")            
     else:
         return render_template('no_found.html'), 404
 
