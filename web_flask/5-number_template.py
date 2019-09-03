@@ -44,9 +44,9 @@ def numberisint(nummer):
 
 
 @app.route('/number_template/<nummer>')
-def numberisint(nummer):
+def template_number(nummer):
     """ Print a template wit a variable """
     if nummer.isdigit():
-        return render_template('5-template.html', name=nummer)
+        return render_template('5-number.html', name=nummer)
 
 app.run(host='0.0.0.0', port=5000)
