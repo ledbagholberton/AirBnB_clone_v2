@@ -51,4 +51,5 @@ def number_template(nummer):
     else:
         return render_template('no_found.html'), 404
 
-app.run(host='0.0.0.0', port=5000)
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
