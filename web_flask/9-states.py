@@ -9,14 +9,26 @@ from models.base_model import os_type_storage
 app = Flask(__name__)
 
 
-@app.route('/cities_by_states', strict_slashes=False)
-def cities_list():
-    """ render cities of a State """
+@app.route('/states', strict_slashes=False)
+def states_list():
+    """ render states """
     if os_type_storage == 'db':
         list_state = storage.all('State').values()
     else:
         list_state = storage.all(State).values()
-    return render_template('8-cities_by_states.html', list_state=list_state)
+    return render_template('9-states.html',
+                           list_state=list_state, st_id=0)
+
+
+@app.route('/states/<st_id>', strict_slashes=False)
+def states_list_id(st_id):
+    """ render states with st_id """
+    if os_type_storage == 'db':
+        list_state = storage.all('State').values()
+    else:
+        list_state = storage.all(State).values()
+    return render_template('9-states.html',
+                           list_state=list_state, st_id=st_id)
 
 
 @app.teardown_appcontext
