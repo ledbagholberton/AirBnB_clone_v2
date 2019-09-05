@@ -25,7 +25,8 @@
     color: #000000;
     border: #DDDDDD solid 1px;
     width: 96%;
-    height: max-content;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 div.locations:hover .popover {

@@ -30,6 +30,21 @@ def states_list_id(st_id):
     return render_template('9-states.html',
                            list_state=list_state, st_id=st_id)
 
+@app.route('/hbnb_filter', strict_slashes=False)
+def hbnb_filter():
+    """ render hbnbn filters """
+    if os_type_storage == 'db':
+        l_state = storage.all('State').values()
+        l_city = storage.all('City').values()
+        l_amenity = storage.all('Amenity').values()
+    else:
+        l_state = storage.all(State).values()
+        l_city = storage.all(City).values()
+        l_amenity = storage.all(Amenity).values()
+    return render_template('10-hbnb_filters.html',
+                           l_state=l_state, l_city=l_city,
+                           l_amenity=l_amenity)
+
 
 @app.teardown_appcontext
 def teardown_db(exit):
