@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ start a Flask Web application
 """
-from flask import Flask
+from flask import Flask, abort
 app = Flask(__name__)
 
 
@@ -41,6 +41,8 @@ def numberisint(nummer):
     """ Print a number if is number """
     if nummer.isdigit():
         return("{} is a number".format(nummer))
+    else:
+        abort(404)
 
-if __name__ = "__main__":
+if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
