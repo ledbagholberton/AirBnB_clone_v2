@@ -3,14 +3,14 @@
   <head>
     <title>AirBnB Clone</title>
     <meta charset="utf-8">
-    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="shortcut icon" href="static/images/favicon.ico">
   </head>
 
 <body>
-  <link rel="stylesheet" href="styles/4-common.css">
-  <link rel="stylesheet" href="styles/6-filters.css">
+  <link rel="stylesheet" href="static/styles/4-common.css">
+  <link rel="stylesheet" href="static/styles/6-filters.css">
   <header>
-      <link rel="stylesheet" href="styles/3-header.css">
+      <link rel="stylesheet" href="static/styles/3-header.css">
   </header>
   <div class="container">
       <section class="section_1">
@@ -18,12 +18,12 @@
               <h3>States</h3>
               <h4>&nbsp; </h4>
               <ul class="popover">
-                <li><h2>California</h2></li>
-                <li>Page 1</li>
-                <li>Page 2</li>
-                <li><h2>Arizona</h2></li>
-                <li>Page 1</li>
-                <li>Page 2</li>
+	      {% for state in l_state | sort(attribute='name') %}
+                <li><h3>{{ state.name }}</h3></li>
+                 {% for city in state.cities | sort(attribute='name') %}
+                    <li><h4>{{ city.name }}</h4></li>
+	         {% endfor %}
+	      {% endfor %}
               </ul>
             </div>
           
@@ -31,10 +31,9 @@
               <h3>Amenities</h3>
               <h4>&nbsp;</h4>
               <ul class="popover">
-                    <li>Internet</li>
-                    <li>TV</li>
-                    <li>Pool</li>
-                    <li>Jacuzzi</li>
+		{% for amenity in l_amenity | sort(attribute='name') %}
+                    <li>{{ amenity.name }}</li>
+                {% endfor %}
               </ul>
           </div>
           <button class="btn">
@@ -43,7 +42,7 @@
       </section>
   </div>
   <footer>
-      <link rel="stylesheet" href="styles/3-footer.css">
+      <link rel="stylesheet" href="static/styles/3-footer.css">
       <p class="foot_p">Holberton School</p>
   </footer>
 </body>
