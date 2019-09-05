@@ -30,6 +30,7 @@ def states_list_id(st_id):
     return render_template('9-states.html',
                            list_state=list_state, st_id=st_id)
 
+
 @app.route('/hbnb_filter', strict_slashes=False)
 def hbnb_filter():
     """ render hbnbn filters """
