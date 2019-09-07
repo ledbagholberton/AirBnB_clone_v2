@@ -52,14 +52,14 @@ def hbnb_all():
     """ render hbnbn places """
     if os_type_storage == 'db':
         l_state = storage.all('State').values()
-        l_city = storage.all('City').values()
+        l_place = storage.all('Place').values()
         l_amenity = storage.all('Amenity').values()
     else:
         l_state = storage.all(State).values()
-        l_city = storage.all(City).values()
+        l_place = storage.all(Place).values()
         l_amenity = storage.all(Amenity).values()
     return render_template('100-hbnb.html',
-                           l_state=l_state, l_city=l_city,
+                           l_state=l_state, l_place=l_place,
                            l_amenity=l_amenity)
 
 

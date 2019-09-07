@@ -18,31 +18,35 @@
 	<div class="locations">
 	  <h3>States</h3>
 	  <h4>&nbsp;</h4>
-	  <ul class="popover">
+	  <div class="popover">
 	  {% for state in l_state | sort(attribute='name') %}
-            <li><h3>{{ state.name }}</h3></li>
+            <ul><h3>{{ state.name }}</h3></ul>
              {% for city in state.cities | sort(attribute='name') %}
-                <li><h4>{{ city.name }}</h4></li>
+                <ul><h4>{{ city.name }}</h4></ul>
 	     {% endfor %}
-	  {% endfor %}</ul>
-	  </ul>
-	  <div class="amenities">
-	      <h3>Amenities</h3>
-	      <h4>&nbsp;</h4>
-	      <ul class="popover">
-	        {% for amenity in l_amenity | sort(attribute='name') %}
-                    <li>{{ amenity.name }}</li>
-                {% endfor %}</ul>
-	     </ul>
-         </div>
-	<button type="button">Search</button>
+	  {% endfor %}
+	  </div>
+	</div>
+	<div class="amenities">
+	  <h3>Amenities</h3>
+	  <h4>&nbsp;</h4>
+	  <div class="popover">
+	    {% for amenity in l_amenity | sort(attribute='name') %}
+            <ul>{{ amenity.name }}</ul>
+            {% endfor %}
+	  </div>
+        </div>
+      <button type="button">Search</button>
       </section>
       <section class="places">
 	<h1>Places</h1>
 	<article>
 	  <div class="title_box">
+	    {% for place in l_place | sort(attribute='name') %}
+	    <ul>{{place}}</ul>
+            {% endfor %}
 	    <h2>My Home</h2>
-	    <div class="price_by_night">$129</div>
+	    <div class="price_by_night">169</div>
 	  </div>
 	  <div class="information">
 	    <div class="max_guest">6 Guests</div>
