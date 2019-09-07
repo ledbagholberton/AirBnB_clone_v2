@@ -1,4 +1,3 @@
-
 .container .filters {
     position: relative;
     background: white;
@@ -51,23 +50,16 @@ button:hover {
     height: 100%;
     width: 25%;
 }
-
 .popover {
-    display: none;
-    position: absolute;
-    margin: -3.3% 0% 0% -12.5%;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    font-size: 16px;
-    list-style-type: none;
-    background: #fafafa;
-    color: #000000;
-    border: #DDDDDD solid 1px;
-    width: 96%;
-    max-height: 300px;
+    visibility: hidden;
+    width: 100%;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    background: #FAFAFA;
+    padding-bottom: 25px;
+    height: 300px;
     overflow-y: auto;
 }
-
 .amenities .popover {
     padding: 20px 0;
     margin-left: -5px;
